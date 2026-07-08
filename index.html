@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Consulta · Ambulatório de Egressos · 3ª Etapa Canguru</title>
+<style>
+  :root{
+    --bg: #F2F1EA;
+    --paper: #FFFFFF;
+    --ink: #1C2A26;
+    --ink-soft: #4B5B56;
+    --line: #DAD6C8;
+    --primary: #1F4B43;
+    --primary-soft: #E7EEEA;
+    --accent: #C1652F;
+    --accent-soft: #F4E3D6;
+    --alert: #A23B2E;
+    --radius: 10px;
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    padding-bottom: 60px;
+  }
+
+  header.top{
+    background: var(--primary);
+    color: #F2F1EA;
+    padding: 28px 24px 24px;
+  }
+
+  .top-inner{
+    max-width: 880px;
+    margin: 0 auto;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+
+  .kangaroo-mark{
+    flex: 0 0 auto;
+    width:46px; height:46px;
+  }
+
+  header.top h1{
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    margin:0 0 4px;
+    letter-spacing: 0.2px;
+  }
+
+  header.top p{
+    margin:0;
+    font-size: 13px;
+    color: #C9D6D0;
+  }
+
+  main{
+    max-width: 880px;
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+
+  section.card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    overflow: hidden;
+  }
+
+  .card-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .card-head .idx{
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--accent);
+    font-weight:700;
+    letter-spacing: 0.5px;
+  }
+
+  .card-head h2{
+    font-family: var(--serif);
+    font-size: 17px;
+    margin:0;
+    color: var(--primary);
+    font-weight:700;
+  }
+
+  .card-head .sub{
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-left:auto;
+  }
+
+  .card-body{ padding: 16px 20px 20px; }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 16px;
+  }
+  @media (max-width: 620px){ .grid{ grid-template-columns: 1fr; } }
+
+  .field{ display:flex; flex-direction:column; gap:5px; }
+  .field.span2{ grid-column: 1 / -1; }
+
+  label{
+    font-size: 12px;
+    font-weight:600;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  input[type=text], input[type=date], select, textarea{
+    font-family: var(--sans);
+    font-size: 14.5px;
+    color: var(--ink);
+    background: #FBFAF7;
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 9px 10px;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    background: #fff;
+  }
+
+  textarea{ resize: vertical; min-height: 90px; font-size: 14.5px; line-height:1.5; }
+  textarea.tall{ min-height: 130px; }
+
+  .ig-row{ display:flex; gap:8px; }
+  .ig-row input{ width: 70px; flex: none; }
+  .ig-row span{ align-self:center; font-size: 13px; color: var(--ink-soft); }
+
+  .calc-box{
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    background: var(--primary-soft);
+    border: 1px dashed #9CB6AC;
+    border-radius: 8px;
+    padding: 12px 14px;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 16px;
+  }
+  @media (max-width: 620px){ .calc-box{ grid-template-columns: 1fr; } }
+
+  .calc-item .k{ font-size:11px; color: var(--ink-soft); text-transform:uppercase; letter-spacing:0.4px; }
+  .calc-item .v{ font-family: var(--serif); font-size:16px; color: var(--primary); font-weight:700; margin-top:2px; }
+  .calc-item .v.warn{ color: var(--alert); }
+
+  /* checklist */
+  .roteiro{
+    background: var(--accent-soft);
+    border: 1px solid #E4C4A5;
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+  }
+  .roteiro .card-head{ border-bottom: 1px solid #E4C4A5; }
+  .roteiro-groups{
+    padding: 4px 20px 18px;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px 28px;
+  }
+  @media (max-width: 620px){ .roteiro-groups{ grid-template-columns: 1fr; } }
+
+  .roteiro-group{ padding: 10px 0; }
+  .roteiro-group h3{
+    font-size: 12.5px;
+    margin: 0 0 6px;
+    color: var(--accent);
+    font-weight:700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .roteiro-group ul{ margin:0; padding-left: 0; list-style:none; }
+  .roteiro-group li{
+    display:flex; align-items:flex-start; gap:8px;
+    font-size: 13.5px;
+    padding: 3px 0;
+    color: var(--ink);
+  }
+  .roteiro-group input[type=checkbox]{
+    margin-top: 3px;
+    accent-color: var(--accent);
+    flex: none;
+  }
+  .roteiro-note{
+    padding: 0 20px 16px;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .roteiro-caveat{
+    font-size: 12px;
+    color: var(--accent);
+    font-style: italic;
+    margin: -2px 0 8px;
+    line-height: 1.4;
+  }
+
+  .roteiro-group textarea{
+    margin-top: 6px;
+    width: 100%;
+    min-height: 54px;
+    font-size: 13px;
+    font-family: var(--sans);
+    background: #FFFDF9;
+    border: 1px solid #E4C4A5;
+    border-radius: 6px;
+    padding: 7px 9px;
+    resize: vertical;
+  }
+  .roteiro-group textarea:focus{
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    background: #fff;
+  }
+  .roteiro-group textarea::placeholder{
+    color: #B8A48F;
+  }
+
+  .actions{
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg) 60%, transparent);
+    padding: 18px 0 6px;
+    display:flex;
+    gap: 10px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  button{
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight:600;
+    border-radius: 8px;
+    padding: 11px 18px;
+    cursor:pointer;
+    border: 1px solid transparent;
+  }
+  #btnGerar{ background: var(--primary); color:#fff; }
+  #btnGerar:hover{ background:#173B34; }
+  #btnLimpar{ background: transparent; color: var(--ink-soft); border-color: var(--line); }
+  #btnLimpar:hover{ background: #EDEAE0; }
+  #btnCopiar{ background: var(--accent); color:#fff; display:none; }
+  #btnCopiar:hover{ background:#A6521F; }
+
+  .output-wrap{ max-width: 880px; margin: 0 auto 40px; padding: 0 16px; }
+  #saida{
+    display:none;
+    white-space: pre-wrap;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    font-family: "SFMono-Regular", Consolas, Menlo, monospace;
+    font-size: 13px;
+    line-height:1.6;
+    color: var(--ink);
+  }
+  .copied-flag{
+    display:none;
+    font-size: 12.5px;
+    color: var(--primary);
+    font-weight:600;
+    margin-left: 6px;
+  }
+
+  @media print{
+    header.top{ background:#fff; color:#000; border-bottom: 2px solid #000; }
+    .kangaroo-mark path{ fill:#000; }
+    header.top p{ color:#333; }
+    .roteiro, .actions, #btnCopiar{ display:none !important; }
+    body{ background:#fff; }
+    section.card{ border-color:#999; break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <svg class="kangaroo-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 34c-4 0-7-3-7-7 0-3 2-5.5 4.5-6.5C11 17 13 13 17 11c1.5-3 5-5 8-5 5 0 9 3.5 10 8 3 1 5 4 5 7.5 0 4-3 7-7 7h-2v6c0 3-2.5 5-5.5 5H20c-3.3 0-6-2.7-6-6v-6z" stroke="#F2F1EA" stroke-width="1.6"/>
+      <circle cx="29" cy="15" r="1.4" fill="#F2F1EA"/>
+    </svg>
+    <div>
+      <h1>Guia de Consulta — Ambulatório de Egressos</h1>
+      <p>3ª Etapa · Método Canguru · preencha e gere o texto para colar no prontuário</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- 1. IDENTIFICAÇÃO -->
+  <section class="card">
+    <div class="card-head"><span class="idx">01</span><h2>Identificação</h2></div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="field"><label for="nome">Nome do paciente</label><input type="text" id="nome"></div>
+        <div class="field"><label for="nomeMae">Nome da mãe / acompanhante</label><input type="text" id="nomeMae"></div>
+
+        <div class="field"><label for="dn">Data de nascimento</label><input type="date" id="dn"></div>
+        <div class="field">
+          <label for="igSem">IG ao nascimento</label>
+          <div class="ig-row">
+            <input type="text" id="igSem" inputmode="numeric" placeholder="sem">
+            <span>sem +</span>
+            <input type="text" id="igDias" inputmode="numeric" placeholder="dias">
+            <span>dias</span>
+          </div>
+        </div>
+
+        <div class="field"><label for="dataConsulta">Data da consulta</label><input type="date" id="dataConsulta"></div>
+        <div class="field"></div>
+
+        <div class="field">
+          <label for="tipoMae">Tipagem sanguínea — mãe</label>
+          <select id="tipoMae">
+            <option value="">—</option>
+            <option>O+</option><option>O-</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tipoBebe">Tipagem sanguínea — bebê</label>
+          <select id="tipoBebe">
+            <option value="">—</option>
+            <option>O+</option><option>O-</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+
+        <div class="calc-box">
+          <div class="calc-item"><div class="k">Idade cronológica</div><div class="v" id="calcCronologica">—</div></div>
+          <div class="calc-item"><div class="k">IGPM atual</div><div class="v" id="calcIgpm">—</div></div>
+          <div class="calc-item"><div class="k">Idade corrigida</div><div class="v" id="calcCorrigida">—</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. DADOS ANTROPOMÉTRICOS -->
+  <section class="card">
+    <div class="card-head"><span class="idx">02</span><h2>Dados antropométricos atuais</h2></div>
+    <div class="card-body">
+      <div class="grid">
+        <div class="field"><label for="peso">Peso (kg)</label><input type="text" id="peso" inputmode="decimal" placeholder="ex: 4,250"></div>
+        <div class="field"><label for="estatura">Estatura (cm)</label><input type="text" id="estatura" inputmode="decimal" placeholder="ex: 54,5"></div>
+        <div class="field"><label for="pc">Perímetro cefálico (cm)</label><input type="text" id="pc" inputmode="decimal" placeholder="ex: 36,2"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROTEIRO DE PERGUNTAS -->
+  <section class="roteiro">
+    <div class="card-head"><span class="idx">✓</span><h2>Roteiro de anamnese dirigida</h2><span class="sub">o que perguntar à mãe/acompanhante</span></div>
+    <div class="roteiro-groups">
+      <div class="roteiro-group">
+        <h3>Alimentação</h3>
+        <ul>
+          <li><input type="checkbox">Aleitamento materno exclusivo? Livre demanda?</li>
+          <li><input type="checkbox">Uso de fórmula/complemento — qual, volume, técnica de preparo</li>
+          <li><input type="checkbox">Pega, sucção, engasgos, refluxo</li>
+          <li><input type="checkbox">Ganho de peso desde a última pesagem</li>
+        </ul>
+        <textarea id="obsAlimentacao" placeholder="Observações — alimentação..."></textarea>
+      </div>
+      <div class="roteiro-group">
+        <h3>Eliminações e sono</h3>
+        <ul>
+          <li><input type="checkbox">Diurese (frequência, aspecto)</li>
+          <li><input type="checkbox">Evacuações (frequência, aspecto, dificuldade)</li>
+          <li><input type="checkbox">Padrão de sono, posição para dormir</li>
+        </ul>
+        <textarea id="obsEliminacoes" placeholder="Observações — eliminações e sono..."></textarea>
+      </div>
+      <div class="roteiro-group">
+        <h3>Desenvolvimento (DNPM)</h3>
+        <p class="roteiro-caveat">Até atingir a idade corrigida de termo (40 sem) ainda não há marcos esperados — avaliar tônus, postura e reflexos; os demais domínios do DNPM seguem listados para acompanhamento evolutivo.</p>
+        <ul>
+          <li><input type="checkbox">Tônus e postura (flexão/extensão, simetria)</li>
+          <li><input type="checkbox">Reflexos arcaicos (sucção, preensão, Moro)</li>
+          <li><input type="checkbox">Motor grosso (controle cefálico, quando aplicável)</li>
+          <li><input type="checkbox">Motor fino / coordenação viso-motora</li>
+          <li><input type="checkbox">Linguagem / comunicação (vocalização, reação a voz e sons)</li>
+          <li><input type="checkbox">Pessoal-social (contato visual, sorriso social)</li>
+        </ul>
+        <textarea id="obsDesenvolvimento" placeholder="Observações — desenvolvimento/DNPM..."></textarea>
+      </div>
+      <div class="roteiro-group">
+        <h3>Triagens neonatais</h3>
+        <ul>
+          <li><input type="checkbox">Teste do pezinho (resultado/repetição)</li>
+          <li><input type="checkbox">Teste da orelhinha</li>
+          <li><input type="checkbox">Teste do olhinho / fundo de olho (ROP se aplicável)</li>
+          <li><input type="checkbox">Teste do coraçãozinho</li>
+          <li><input type="checkbox">Triagem de quadril (Barlow/Ortolani, USG se indicado)</li>
+        </ul>
+        <textarea id="obsTriagens" placeholder="Observações — triagens neonatais..."></textarea>
+      </div>
+      <div class="roteiro-group">
+        <h3>Método Canguru em casa</h3>
+        <ul>
+          <li><input type="checkbox">Posição canguru — frequência e tempo diário</li>
+          <li><input type="checkbox">Dificuldades para manter a posição</li>
+          <li><input type="checkbox">Rede de apoio / retorno da mãe ao trabalho</li>
+        </ul>
+        <textarea id="obsCanguru" placeholder="Observações — Método Canguru em casa..."></textarea>
+      </div>
+      <div class="roteiro-group">
+        <h3>Outros</h3>
+        <ul>
+          <li><input type="checkbox">Vacinação em dia (incl. calendário especial de prematuro)</li>
+          <li><input type="checkbox">Medicações em uso e adesão</li>
+          <li><input type="checkbox">Intercorrências desde a última consulta (febre, internação, PS)</li>
+          <li><input type="checkbox">Sinais de alerta (desconforto respiratório, recusa alimentar, letargia)</li>
+        </ul>
+        <textarea id="obsOutros" placeholder="Observações — outros..."></textarea>
+      </div>
+    </div>
+    <p class="roteiro-note">Preencha a observação de cada tópico — ela é anexada automaticamente ao texto gerado. Os achados centrais devem seguir também na HDA abaixo.</p>
+  </section>
+
+  <!-- RESUMO DA INTERNAÇÃO -->
+  <section class="card">
+    <div class="card-head"><span class="idx">03</span><h2>Resumo da internação</h2><span class="sub">cole o trecho do prontuário para resumir</span></div>
+    <div class="card-body">
+      <textarea id="resumo" class="tall" placeholder="Cole aqui o texto do prontuário de internação (o Claude pode resumir para você antes de colar o resultado final)."></textarea>
+    </div>
+  </section>
+
+  <!-- HDA -->
+  <section class="card">
+    <div class="card-head"><span class="idx">04</span><h2>História de doença atual (HDA)</h2></div>
+    <div class="card-body">
+      <textarea id="hda" class="tall" placeholder="Queixas atuais, achados da anamnese dirigida, evolução desde a última consulta..."></textarea>
+    </div>
+  </section>
+
+  <!-- EXAMES -->
+  <section class="card">
+    <div class="card-head"><span class="idx">05</span><h2>Últimos exames realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-body">
+      <textarea id="exames" placeholder="Exames laboratoriais, de imagem, triagens..."></textarea>
+    </div>
+  </section>
+
+  <!-- PARECERES -->
+  <section class="card">
+    <div class="card-head"><span class="idx">06</span><h2>Últimos pareceres realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-body">
+      <textarea id="pareceres" placeholder="Pareceres de especialidades (oftalmo, cardio, neuro, cirurgia...)"></textarea>
+    </div>
+  </section>
+
+  <!-- PENDÊNCIAS -->
+  <section class="card">
+    <div class="card-head"><span class="idx">07</span><h2>Pendências</h2></div>
+    <div class="card-body">
+      <textarea id="pendencias" placeholder="Exames, pareceres ou condutas ainda pendentes"></textarea>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO -->
+  <section class="card">
+    <div class="card-head"><span class="idx">08</span><h2>Programação</h2><span class="sub">próximos exames pré-agendados</span></div>
+    <div class="card-body">
+      <textarea id="programacao" placeholder="Exames e retornos já agendados, com datas"></textarea>
+    </div>
+  </section>
+
+  <!-- CONDUTA -->
+  <section class="card">
+    <div class="card-head"><span class="idx">09</span><h2>Conduta</h2></div>
+    <div class="card-body">
+      <textarea id="conduta" class="tall" placeholder="Orientações, prescrições, encaminhamentos, retorno"></textarea>
+    </div>
+  </section>
+
+</main>
+
+<div class="actions">
+  <button id="btnGerar">Gerar nota para o prontuário</button>
+  <button id="btnCopiar">Copiar texto</button>
+  <span class="copied-flag" id="flagCopiado">Copiado ✓</span>
+  <button id="btnLimpar">Limpar formulário</button>
+</div>
+
+<div class="output-wrap">
+  <pre id="saida"></pre>
+</div>
+
+<script>
+  // default consultation date = today
+  const hoje = new Date();
+  document.getElementById('dataConsulta').value = hoje.toISOString().slice(0,10);
+
+  function parseDate(str){
+    if(!str) return null;
+    const [y,m,d] = str.split('-').map(Number);
+    return new Date(y, m-1, d);
+  }
+
+  function fmtDate(str){
+    if(!str) return '—';
+    const [y,m,d] = str.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function diffDays(a,b){
+    return Math.round((b - a) / 86400000);
+  }
+
+  function weeksAndDays(totalDays){
+    const w = Math.floor(totalDays/7);
+    const d = totalDays % 7;
+    return `${w}sem${d ? ' e '+d+'d' : ''}`;
+  }
+
+  function monthsAndDays(totalDays){
+    const months = Math.floor(totalDays/30.44);
+    const remDays = Math.round(totalDays - months*30.44);
+    if(months <= 0) return `${totalDays}d`;
+    return `${months}m${remDays > 0 ? ' e '+remDays+'d' : ''}`;
+  }
+
+  function recalcular(){
+    const dnStr = document.getElementById('dn').value;
+    const consStr = document.getElementById('dataConsulta').value;
+    const igSem = parseInt(document.getElementById('igSem').value, 10);
+    const igDias = parseInt(document.getElementById('igDias').value, 10) || 0;
+
+    const elCron = document.getElementById('calcCronologica');
+    const elIgpm = document.getElementById('calcIgpm');
+    const elCorr = document.getElementById('calcCorrigida');
+
+    if(!dnStr || !consStr || isNaN(igSem)){
+      elCron.textContent = '—'; elIgpm.textContent = '—'; elCorr.textContent = '—';
+      elCorr.classList.remove('warn');
+      return;
+    }
+
+    const dn = parseDate(dnStr);
+    const cons = parseDate(consStr);
+    const cronDays = diffDays(dn, cons);
+
+    if(cronDays < 0){
+      elCron.textContent = 'data inválida'; elIgpm.textContent = '—'; elCorr.textContent = '—';
+      return;
+    }
+
+    elCron.textContent = `${monthsAndDays(cronDays)} (${weeksAndDays(cronDays)})`;
+
+    const igNascDays = igSem*7 + igDias;
+    const igpmDays = igNascDays + cronDays;
+    elIgpm.textContent = weeksAndDays(igpmDays);
+
+    const corrDays = igpmDays - 280; // 40 semanas = termo
+    if(corrDays <= 0){
+      elCorr.textContent = 'ainda não atingiu termo (IGPM < 40 sem)';
+      elCorr.classList.add('warn');
+    } else {
+      elCorr.textContent = `${monthsAndDays(corrDays)} (${weeksAndDays(corrDays)})`;
+      elCorr.classList.remove('warn');
+    }
+  }
+
+  ['dn','dataConsulta','igSem','igDias'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', recalcular);
+  });
+  recalcular();
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function orTraco(s){ return s ? s : '—'; }
+
+  document.getElementById('btnGerar').addEventListener('click', () => {
+    const igTxt = val('igSem') ? `${val('igSem')}sem${val('igDias') ? ' e '+val('igDias')+'d' : ''}` : '—';
+
+    const texto =
+`GUIA DE CONSULTA — AMBULATÓRIO DE EGRESSOS (3ª ETAPA MÉTODO CANGURU)
+
+IDENTIFICAÇÃO
+Paciente: ${orTraco(val('nome'))}
+Mãe/Acompanhante: ${orTraco(val('nomeMae'))}
+Data de nascimento: ${fmtDate(val('dn'))}
+IG ao nascimento: ${igTxt}
+Data da consulta: ${fmtDate(val('dataConsulta'))}
+Idade cronológica: ${document.getElementById('calcCronologica').textContent}
+IGPM atual: ${document.getElementById('calcIgpm').textContent}
+Idade corrigida: ${document.getElementById('calcCorrigida').textContent}
+Tipagem sanguínea materna: ${orTraco(val('tipoMae'))}
+Tipagem sanguínea do RN: ${orTraco(val('tipoBebe'))}
+
+DADOS ANTROPOMÉTRICOS ATUAIS
+Peso: ${orTraco(val('peso'))}${val('peso') ? ' kg' : ''}
+Estatura: ${orTraco(val('estatura'))}${val('estatura') ? ' cm' : ''}
+Perímetro cefálico: ${orTraco(val('pc'))}${val('pc') ? ' cm' : ''}
+
+ANAMNESE DIRIGIDA — OBSERVAÇÕES POR TÓPICO
+Alimentação: ${orTraco(val('obsAlimentacao'))}
+Eliminações e sono: ${orTraco(val('obsEliminacoes'))}
+Desenvolvimento (DNPM): ${orTraco(val('obsDesenvolvimento'))}
+Triagens neonatais: ${orTraco(val('obsTriagens'))}
+Método Canguru em casa: ${orTraco(val('obsCanguru'))}
+Outros: ${orTraco(val('obsOutros'))}
+
+RESUMO DA INTERNAÇÃO
+${orTraco(val('resumo'))}
+
+HISTÓRIA DE DOENÇA ATUAL (HDA)
+${orTraco(val('hda'))}
+
+ÚLTIMOS EXAMES REALIZADOS
+${orTraco(val('exames'))}
+
+ÚLTIMOS PARECERES REALIZADOS
+${orTraco(val('pareceres'))}
+
+PENDÊNCIAS
+${orTraco(val('pendencias'))}
+
+PROGRAMAÇÃO (próximos exames pré-agendados)
+${orTraco(val('programacao'))}
+
+CONDUTA
+${orTraco(val('conduta'))}`;
+
+    const saida = document.getElementById('saida');
+    saida.textContent = texto;
+    saida.style.display = 'block';
+    document.getElementById('btnCopiar').style.display = 'inline-block';
+    saida.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  document.getElementById('btnCopiar').addEventListener('click', () => {
+    const texto = document.getElementById('saida').textContent;
+    navigator.clipboard.writeText(texto).then(() => {
+      const flag = document.getElementById('flagCopiado');
+      flag.style.display = 'inline';
+      setTimeout(() => flag.style.display = 'none', 2000);
+    });
+  });
+
+  document.getElementById('btnLimpar').addEventListener('click', () => {
+    if(!confirm('Limpar todos os campos do formulário?')) return;
+    document.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+    document.querySelectorAll('select').forEach(el => el.value = '');
+    document.getElementById('dn').value = '';
+    document.getElementById('dataConsulta').value = hoje.toISOString().slice(0,10);
+    document.querySelectorAll('.roteiro input[type=checkbox]').forEach(el => el.checked = false);
+    document.querySelectorAll('.roteiro-group textarea').forEach(el => el.value = '');
+    document.getElementById('saida').style.display = 'none';
+    document.getElementById('btnCopiar').style.display = 'none';
+    recalcular();
+  });
+</script>
+
+</body>
+</html>
