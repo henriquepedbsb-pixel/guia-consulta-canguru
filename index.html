@@ -456,74 +456,76 @@
     </div>
   </section>
 
-  <!-- ROTEIRO DE PERGUNTAS -->
+  <!-- ROTEIRO DE ANAMNESE DIRIGIDA -->
   <section class="roteiro">
-    <div class="card-head"><span class="idx">✓</span><h2>Roteiro de anamnese dirigida</h2><span class="sub">o que perguntar à mãe/acompanhante</span></div>
+    <div class="card-head"><span class="idx">✓</span><h2>Roteiro de anamnese dirigida</h2><span class="sub">marque as possibilidades observadas/confirmadas</span></div>
     <div class="roteiro-groups">
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoAlimentacao">
         <h3>Alimentação</h3>
         <ul>
-          <li><input type="checkbox">Aleitamento materno exclusivo? Livre demanda?</li>
-          <li><input type="checkbox">Uso de fórmula/complemento — qual, volume, técnica de preparo</li>
-          <li><input type="checkbox">Pega, sucção, engasgos, refluxo</li>
-          <li><input type="checkbox">Ganho de peso desde a última pesagem</li>
+          <li><input type="checkbox">Seio materno exclusivo</li>
+          <li><input type="checkbox">Livre demanda</li>
+          <li><input type="checkbox">Uso de fórmula/complemento</li>
+          <li><input type="checkbox">Boa pega e sucção, sem engasgos</li>
+          <li><input type="checkbox">Refluxo/regurgitação presente</li>
+          <li><input type="checkbox">Ganho de peso adequado desde a última pesagem</li>
         </ul>
-        <textarea id="obsAlimentacao" placeholder="Observações — alimentação..."></textarea>
+        <textarea id="obsAlimentacao" placeholder="Observações adicionais — alimentação..."></textarea>
       </div>
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoEliminacoes">
         <h3>Eliminações e sono</h3>
         <ul>
-          <li><input type="checkbox">Diurese (frequência, aspecto)</li>
-          <li><input type="checkbox">Evacuações (frequência, aspecto, dificuldade)</li>
-          <li><input type="checkbox">Padrão de sono, posição para dormir</li>
+          <li><input type="checkbox">Diurese presente, aspecto normal</li>
+          <li><input type="checkbox">Evacuações presentes, aspecto normal</li>
+          <li><input type="checkbox">Padrão de sono adequado</li>
         </ul>
-        <textarea id="obsEliminacoes" placeholder="Observações — eliminações e sono..."></textarea>
+        <textarea id="obsEliminacoes" placeholder="Observações adicionais — eliminações e sono..."></textarea>
       </div>
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoDesenvolvimento">
         <h3>Desenvolvimento (DNPM)</h3>
         <p class="roteiro-caveat">Até atingir a idade corrigida de termo (40 sem) ainda não há marcos esperados — avaliar tônus, postura e reflexos; os demais domínios do DNPM seguem listados para acompanhamento evolutivo.</p>
         <ul>
-          <li><input type="checkbox">Tônus e postura (flexão/extensão, simetria)</li>
-          <li><input type="checkbox">Reflexos arcaicos (sucção, preensão, Moro)</li>
-          <li><input type="checkbox">Motor grosso (controle cefálico, quando aplicável)</li>
-          <li><input type="checkbox">Motor fino / coordenação viso-motora</li>
-          <li><input type="checkbox">Linguagem / comunicação (vocalização, reação a voz e sons)</li>
-          <li><input type="checkbox">Pessoal-social (contato visual, sorriso social)</li>
+          <li><input type="checkbox">Tônus e postura adequados, simétricos</li>
+          <li><input type="checkbox">Reflexos arcaicos presentes (sucção, preensão, Moro)</li>
+          <li><input type="checkbox">Controle cefálico presente (quando aplicável)</li>
+          <li><input type="checkbox">Coordenação viso-motora adequada</li>
+          <li><input type="checkbox">Vocalização/reação a voz e sons presente</li>
+          <li><input type="checkbox">Contato visual e sorriso social presentes</li>
         </ul>
-        <textarea id="obsDesenvolvimento" placeholder="Observações — desenvolvimento/DNPM..."></textarea>
+        <textarea id="obsDesenvolvimento" placeholder="Observações adicionais — desenvolvimento/DNPM..."></textarea>
       </div>
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoTriagens">
         <h3>Triagens neonatais</h3>
         <ul>
-          <li><input type="checkbox">Teste do pezinho (resultado/repetição)</li>
-          <li><input type="checkbox">Teste da orelhinha</li>
-          <li><input type="checkbox">Teste do olhinho / fundo de olho (ROP se aplicável)</li>
-          <li><input type="checkbox">Teste do coraçãozinho</li>
-          <li><input type="checkbox">Triagem de quadril (Barlow/Ortolani, USG se indicado)</li>
+          <li><input type="checkbox">Teste do pezinho realizado, sem alterações</li>
+          <li><input type="checkbox">Teste da orelhinha realizado, sem alterações</li>
+          <li><input type="checkbox">Teste do olhinho/fundo de olho realizado, sem alterações</li>
+          <li><input type="checkbox">Teste do coraçãozinho realizado, sem alterações</li>
+          <li><input type="checkbox">Triagem de quadril normal (Barlow/Ortolani)</li>
         </ul>
-        <textarea id="obsTriagens" placeholder="Observações — triagens neonatais..."></textarea>
+        <textarea id="obsTriagens" placeholder="Observações adicionais — triagens neonatais..."></textarea>
       </div>
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoCanguru">
         <h3>Método Canguru em casa</h3>
         <ul>
-          <li><input type="checkbox">Posição canguru — frequência e tempo diário</li>
-          <li><input type="checkbox">Dificuldades para manter a posição</li>
-          <li><input type="checkbox">Rede de apoio / retorno da mãe ao trabalho</li>
+          <li><input type="checkbox">Posição canguru mantida regularmente</li>
+          <li><input type="checkbox">Sem dificuldades para manter a posição</li>
+          <li><input type="checkbox">Rede de apoio presente</li>
         </ul>
-        <textarea id="obsCanguru" placeholder="Observações — Método Canguru em casa..."></textarea>
+        <textarea id="obsCanguru" placeholder="Observações adicionais — Método Canguru em casa..."></textarea>
       </div>
-      <div class="roteiro-group">
+      <div class="roteiro-group" id="grupoOutros">
         <h3>Outros</h3>
         <ul>
           <li><input type="checkbox">Vacinação em dia (incl. calendário especial de prematuro)</li>
-          <li><input type="checkbox">Medicações em uso e adesão</li>
-          <li><input type="checkbox">Intercorrências desde a última consulta (febre, internação, PS)</li>
-          <li><input type="checkbox">Sinais de alerta (desconforto respiratório, recusa alimentar, letargia)</li>
+          <li><input type="checkbox">Boa adesão às medicações em uso</li>
+          <li><input type="checkbox">Sem intercorrências desde a última consulta</li>
+          <li><input type="checkbox">Sem sinais de alerta (desconforto respiratório, recusa alimentar, letargia)</li>
         </ul>
-        <textarea id="obsOutros" placeholder="Observações — outros..."></textarea>
+        <textarea id="obsOutros" placeholder="Observações adicionais — outros..."></textarea>
       </div>
     </div>
-    <p class="roteiro-note">Preencha a observação de cada tópico — ela é anexada automaticamente ao texto gerado. Os achados centrais devem seguir também na HDA abaixo.</p>
+    <p class="roteiro-note">Marque as possibilidades confirmadas e complete com observações — tudo é anexado automaticamente ao texto gerado. Os achados centrais devem seguir também na HDA abaixo.</p>
   </section>
 
   <!-- RESUMO DA INTERNAÇÃO -->
@@ -928,6 +930,24 @@
   function val(id){ return document.getElementById(id).value.trim(); }
   function orTraco(s){ return s ? s : '—'; }
 
+  // itens de possibilidade marcados num grupo do roteiro de anamnese
+  function itensMarcados(groupId){
+    const grupo = document.getElementById(groupId);
+    if(!grupo) return [];
+    return Array.from(grupo.querySelectorAll('li input[type=checkbox]:checked'))
+      .map(cb => cb.parentElement.textContent.trim());
+  }
+
+  // combina os itens marcados (possibilidades) com a observação livre do tópico
+  function textoAnamneseTopico(groupId, obsId){
+    const marcados = itensMarcados(groupId);
+    const obs = val(obsId);
+    const partes = [];
+    if(marcados.length) partes.push(marcados.join('; ') + '.');
+    if(obs) partes.push(obs);
+    return partes.length ? partes.join(' ') : '—';
+  }
+
   // ═══════════════════════════════════════════════════════════════════════
   // 00. PREENCHIMENTO AUTOMÁTICO A PARTIR DA NOTA GERADA PELO CLAUDE
   // ═══════════════════════════════════════════════════════════════════════
@@ -1130,7 +1150,8 @@
     const texto =
 `GUIA DE CONSULTA — AMBULATÓRIO DE EGRESSOS (3ª ETAPA MÉTODO CANGURU)
 
-IDENTIFICAÇÃO
+.
+# 01 Identificação
 Paciente: ${orTraco(val('nome'))}
 Sexo: ${val('sexoBebe') === 'M' ? 'Masculino' : (val('sexoBebe') === 'F' ? 'Feminino' : '—')}
 Mãe/Acompanhante: ${orTraco(val('nomeMae'))}
@@ -1143,55 +1164,66 @@ Idade corrigida: ${document.getElementById('calcCorrigida').textContent}
 Tipagem sanguínea materna: ${orTraco(val('tipoMae'))}
 Tipagem sanguínea do RN: ${orTraco(val('tipoBebe'))}
 
-DADOS ANTROPOMÉTRICOS ATUAIS
+.
+# 02 Dados antropométricos
+Dados antropométricos atuais
 Peso: ${orTraco(val('peso'))}${val('peso') ? ' kg' : ''}
 Estatura: ${orTraco(val('estatura'))}${val('estatura') ? ' cm' : ''}
 Perímetro cefálico: ${orTraco(val('pc'))}${val('pc') ? ' cm' : ''}
 Z-escore (Intergrowth-21st Postnatal, por IGPM) — peso: ${document.getElementById('zPeso').textContent} | estatura: ${document.getElementById('zEstatura').textContent} | PC: ${document.getElementById('zPc').textContent}
 
-CONSULTA ANTERIOR (${val('dataAnterior') ? fmtDate(val('dataAnterior')) : '—'})
+Consulta anterior (${val('dataAnterior') ? fmtDate(val('dataAnterior')) : '—'})
 Peso: ${orTraco(val('pesoAnterior'))}${val('pesoAnterior') ? ' kg' : ''}
 Estatura: ${orTraco(val('estaturaAnterior'))}${val('estaturaAnterior') ? ' cm' : ''}
 Perímetro cefálico: ${orTraco(val('pcAnterior'))}${val('pcAnterior') ? ' cm' : ''}
 
-EVOLUÇÃO ENTRE CONSULTAS
+Evolução entre consultas
 Δ Peso: ${document.getElementById('deltaPeso').textContent} | Δ Estatura: ${document.getElementById('deltaEstatura').textContent} | Δ PC: ${document.getElementById('deltaPc').textContent}
 Ganho de peso médio: ${document.getElementById('ganhoDiario').textContent}
 
 ANAMNESE DIRIGIDA — OBSERVAÇÕES POR TÓPICO
-Alimentação: ${orTraco(val('obsAlimentacao'))}
-Eliminações e sono: ${orTraco(val('obsEliminacoes'))}
-Desenvolvimento (DNPM): ${orTraco(val('obsDesenvolvimento'))}
-Triagens neonatais: ${orTraco(val('obsTriagens'))}
-Método Canguru em casa: ${orTraco(val('obsCanguru'))}
-Outros: ${orTraco(val('obsOutros'))}
+Alimentação: ${textoAnamneseTopico('grupoAlimentacao','obsAlimentacao')}
+Eliminações e sono: ${textoAnamneseTopico('grupoEliminacoes','obsEliminacoes')}
+Desenvolvimento (DNPM): ${textoAnamneseTopico('grupoDesenvolvimento','obsDesenvolvimento')}
+Triagens neonatais: ${textoAnamneseTopico('grupoTriagens','obsTriagens')}
+Método Canguru em casa: ${textoAnamneseTopico('grupoCanguru','obsCanguru')}
+Outros: ${textoAnamneseTopico('grupoOutros','obsOutros')}
 
-RESUMO DA INTERNAÇÃO
+.
+# 03 Resumo da internação
 ${orTraco(val('resumo'))}
 
-HISTÓRIA DE DOENÇA ATUAL (HDA)
+.
+# 04 História de doença atual (HDA)
 ${orTraco(val('hda'))}
 
-ÚLTIMOS EXAMES REALIZADOS
+.
+# 05 Últimos exames realizados
 ${orTraco(val('exames'))}
 
-ÚLTIMOS PARECERES REALIZADOS
+.
+# 06 Últimos pareceres realizados
 ${orTraco(val('pareceres'))}
 
-PENDÊNCIAS
+.
+# 07 Pendências
 ${orTraco(val('pendencias'))}
 
-PROGRAMAÇÃO (próximos exames pré-agendados)
+.
+# 08 Programação
 ${orTraco(val('programacao'))}
 
-CONDUTA
+.
+# 09 Conduta
 ${orTraco(val('conduta'))}`;
 
     const saida = document.getElementById('saida');
     saida.textContent = texto;
     saida.style.display = 'block';
     document.getElementById('btnCopiar').style.display = 'inline-block';
-    saida.scrollIntoView({behavior:'smooth', block:'start'});
+    if(typeof saida.scrollIntoView === 'function'){
+      saida.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
 
   document.getElementById('btnCopiar').addEventListener('click', () => {
