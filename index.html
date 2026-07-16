@@ -536,9 +536,17 @@
     </div>
   </section>
 
+  <!-- TRIAGENS NEONATAIS -->
+  <section class="card">
+    <div class="card-head"><span class="idx">04</span><h2>Triagens neonatais</h2><span class="sub">pezinho, orelhinha, olhinho, coraçãozinho, quadril</span></div>
+    <div class="card-body">
+      <textarea id="triagensNeonatais" class="tall" placeholder="Resultados das triagens neonatais (teste do pezinho, orelhinha, olhinho/fundoscopia, coraçãozinho, quadril)..."></textarea>
+    </div>
+  </section>
+
   <!-- HDA -->
   <section class="card">
-    <div class="card-head"><span class="idx">04</span><h2>História de doença atual (HDA)</h2></div>
+    <div class="card-head"><span class="idx">05</span><h2>História de doença atual (HDA)</h2></div>
     <div class="card-body">
       <textarea id="hda" class="tall" placeholder="Queixas atuais, achados da anamnese dirigida, evolução desde a última consulta..."></textarea>
     </div>
@@ -546,15 +554,15 @@
 
   <!-- EXAMES -->
   <section class="card">
-    <div class="card-head"><span class="idx">05</span><h2>Últimos exames realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-head"><span class="idx">06</span><h2>Últimos exames realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
     <div class="card-body">
-      <textarea id="exames" placeholder="Exames laboratoriais, de imagem, triagens..."></textarea>
+      <textarea id="exames" placeholder="Exames laboratoriais, de imagem..."></textarea>
     </div>
   </section>
 
   <!-- PARECERES -->
   <section class="card">
-    <div class="card-head"><span class="idx">06</span><h2>Últimos pareceres realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-head"><span class="idx">07</span><h2>Últimos pareceres realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
     <div class="card-body">
       <textarea id="pareceres" placeholder="Pareceres de especialidades (oftalmo, cardio, neuro, cirurgia...)"></textarea>
     </div>
@@ -562,7 +570,7 @@
 
   <!-- PENDÊNCIAS -->
   <section class="card">
-    <div class="card-head"><span class="idx">07</span><h2>Pendências</h2></div>
+    <div class="card-head"><span class="idx">08</span><h2>Pendências</h2></div>
     <div class="card-body">
       <textarea id="pendencias" placeholder="Exames, pareceres ou condutas ainda pendentes"></textarea>
     </div>
@@ -570,7 +578,7 @@
 
   <!-- PROGRAMAÇÃO -->
   <section class="card">
-    <div class="card-head"><span class="idx">08</span><h2>Programação</h2><span class="sub">próximos exames pré-agendados</span></div>
+    <div class="card-head"><span class="idx">09</span><h2>Programação</h2><span class="sub">próximos exames pré-agendados</span></div>
     <div class="card-body">
       <textarea id="programacao" placeholder="Exames e retornos já agendados, com datas"></textarea>
     </div>
@@ -578,7 +586,7 @@
 
   <!-- CONDUTA -->
   <section class="card">
-    <div class="card-head"><span class="idx">09</span><h2>Conduta</h2></div>
+    <div class="card-head"><span class="idx">10</span><h2>Conduta</h2></div>
     <div class="card-body">
       <textarea id="conduta" class="tall" placeholder="Orientações, prescrições, encaminhamentos, retorno"></textarea>
     </div>
@@ -971,6 +979,7 @@
     'DADOS ANTROPOMÉTRICOS ATUAIS',
     'CONSULTA ANTERIOR',
     'RESUMO DA INTERNAÇÃO',
+    'TRIAGENS NEONATAIS',
     'HISTÓRIA DE DOENÇA ATUAL (HDA)',
     'ÚLTIMOS EXAMES REALIZADOS',
     'ÚLTIMOS PARECERES REALIZADOS',
@@ -1099,12 +1108,10 @@
     const tipoBebeRaw = limpo(campo('IDENTIFICAÇÃO', ['Tipagem sanguínea do RN']));
     if(tipoBebeRaw){ const t = mapTipagem(tipoBebeRaw); if(t) document.getElementById('tipoBebe').value = t; }
 
-    // DADOS ANTROPOMÉTRICOS ATUAIS
-    const dataAtualRaw = limpo(campo('DADOS ANTROPOMÉTRICOS ATUAIS', ['Data da medida','Data','Data da avaliação']));
-    if(dataAtualRaw){ const d = extrairData(dataAtualRaw); if(d) setVal('dataConsulta', d); }
-    setVal('peso', extrairNumero(limpo(campo('DADOS ANTROPOMÉTRICOS ATUAIS', ['Peso']))));
-    setVal('estatura', extrairNumero(limpo(campo('DADOS ANTROPOMÉTRICOS ATUAIS', ['Estatura']))));
-    setVal('pc', extrairNumero(limpo(campo('DADOS ANTROPOMÉTRICOS ATUAIS', ['Perímetro cefálico','PC']))));
+    // DADOS ANTROPOMÉTRICOS ATUAIS — nunca preenchido automaticamente.
+    // Peso, estatura, PC e data da consulta atual são aferidos ao vivo,
+    // na própria consulta — por isso este bloco é intencionalmente ignorado
+    // pelo parser, mesmo que o texto colado traga esses dados.
 
     // CONSULTA ANTERIOR (só se a seção existir no material)
     const dataAntRaw = limpo(campo('CONSULTA ANTERIOR', ['Data']));
@@ -1112,6 +1119,7 @@
     setVal('pesoAnterior', extrairNumero(limpo(campo('CONSULTA ANTERIOR', ['Peso']))));
     setVal('estaturaAnterior', extrairNumero(limpo(campo('CONSULTA ANTERIOR', ['Estatura']))));
     setVal('pcAnterior', extrairNumero(limpo(campo('CONSULTA ANTERIOR', ['Perímetro cefálico','PC']))));
+
 
     // Seções de texto livre — copiadas como estão, se houver conteúdo
     function preencherLivre(id, nomeSecao){
@@ -1121,6 +1129,7 @@
       if(el) el.value = texto;
     }
     preencherLivre('resumo', 'RESUMO DA INTERNAÇÃO');
+    preencherLivre('triagensNeonatais', 'TRIAGENS NEONATAIS');
     preencherLivre('hda', 'HISTÓRIA DE DOENÇA ATUAL (HDA)');
     preencherLivre('exames', 'ÚLTIMOS EXAMES REALIZADOS');
     preencherLivre('pareceres', 'ÚLTIMOS PARECERES REALIZADOS');
@@ -1194,27 +1203,31 @@ Outros: ${textoAnamneseTopico('grupoOutros','obsOutros')}
 ${orTraco(val('resumo'))}
 
 .
-# 04 História de doença atual (HDA)
+# 04 Triagens neonatais
+${orTraco(val('triagensNeonatais'))}
+
+.
+# 05 História de doença atual (HDA)
 ${orTraco(val('hda'))}
 
 .
-# 05 Últimos exames realizados
+# 06 Últimos exames realizados
 ${orTraco(val('exames'))}
 
 .
-# 06 Últimos pareceres realizados
+# 07 Últimos pareceres realizados
 ${orTraco(val('pareceres'))}
 
 .
-# 07 Pendências
+# 08 Pendências
 ${orTraco(val('pendencias'))}
 
 .
-# 08 Programação
+# 09 Programação
 ${orTraco(val('programacao'))}
 
 .
-# 09 Conduta
+# 10 Conduta
 ${orTraco(val('conduta'))}`;
 
     const saida = document.getElementById('saida');
