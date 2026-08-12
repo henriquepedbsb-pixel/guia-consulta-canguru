@@ -552,9 +552,17 @@
     </div>
   </section>
 
+  <!-- EXAME FÍSICO -->
+  <section class="card">
+    <div class="card-head"><span class="idx">06</span><h2>Exame físico</h2><span class="sub">pré-preenchido com o padrão normal — edite os achados alterados</span></div>
+    <div class="card-body">
+      <textarea id="exameFisico" class="tall" placeholder="Exame físico..."></textarea>
+    </div>
+  </section>
+
   <!-- EXAMES -->
   <section class="card">
-    <div class="card-head"><span class="idx">06</span><h2>Últimos exames realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-head"><span class="idx">07</span><h2>Últimos exames realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
     <div class="card-body">
       <textarea id="exames" placeholder="Exames laboratoriais, de imagem..."></textarea>
     </div>
@@ -562,7 +570,7 @@
 
   <!-- PARECERES -->
   <section class="card">
-    <div class="card-head"><span class="idx">07</span><h2>Últimos pareceres realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
+    <div class="card-head"><span class="idx">08</span><h2>Últimos pareceres realizados</h2><span class="sub">cole e resuma pelo Claude, se preferir</span></div>
     <div class="card-body">
       <textarea id="pareceres" placeholder="Pareceres de especialidades (oftalmo, cardio, neuro, cirurgia...)"></textarea>
     </div>
@@ -570,7 +578,7 @@
 
   <!-- PENDÊNCIAS -->
   <section class="card">
-    <div class="card-head"><span class="idx">08</span><h2>Pendências</h2></div>
+    <div class="card-head"><span class="idx">09</span><h2>Pendências</h2></div>
     <div class="card-body">
       <textarea id="pendencias" placeholder="Exames, pareceres ou condutas ainda pendentes"></textarea>
     </div>
@@ -578,7 +586,7 @@
 
   <!-- PROGRAMAÇÃO -->
   <section class="card">
-    <div class="card-head"><span class="idx">09</span><h2>Programação</h2><span class="sub">próximos exames pré-agendados</span></div>
+    <div class="card-head"><span class="idx">10</span><h2>Programação</h2><span class="sub">próximos exames pré-agendados</span></div>
     <div class="card-body">
       <textarea id="programacao" placeholder="Exames e retornos já agendados, com datas"></textarea>
     </div>
@@ -586,7 +594,7 @@
 
   <!-- CONDUTA -->
   <section class="card">
-    <div class="card-head"><span class="idx">10</span><h2>Conduta</h2></div>
+    <div class="card-head"><span class="idx">11</span><h2>Conduta</h2></div>
     <div class="card-body">
       <textarea id="conduta" class="tall" placeholder="Orientações, prescrições, encaminhamentos, retorno"></textarea>
     </div>
@@ -962,6 +970,24 @@
 
   const NAO_IDENTIFICADO = /^n[aã]o identificado no material colado\.?$|^—$|^-$|^$/i;
 
+  // Texto padrão do exame físico normal — pré-preenchido ao carregar a página
+  // e ao limpar o formulário. Edite/apague os trechos alterados conforme o caso.
+  const EXAME_FISICO_PADRAO =
+`BEG, ativo(a) e reativo(a), corado(a), hidratado(a), acianótico(a), anictérico(a), eupneico(a).
+FA normotensa.
+AR: MV presente bilateralmente, sem RA, sem sinais de desconforto respiratório.
+ACV: RCR, 2T, BNF, sem sopros.
+ABD: semigloboso, flácido, RHA+, indolor à palpação, sem VCM.
+EXT: boa perfusão, sem edema, TEC < 2seg. Pulsos periféricos cheios e simétricos.
+Genitália e ânus: normais.
+Quadril: Ortolani e Barlow negativos.
+Reflexos arcaicos (Moro, busca, sucção, preensão palmar e plantar) presentes.`;
+
+  function preencherExameFisicoPadrao(){
+    const el = document.getElementById('exameFisico');
+    if(el && !el.value.trim()) el.value = EXAME_FISICO_PADRAO;
+  }
+
   function isVazioOuNaoIdentificado(s){
     if(!s) return true;
     const t = s.trim();
@@ -981,6 +1007,7 @@
     'RESUMO DA INTERNAÇÃO',
     'TRIAGENS NEONATAIS',
     'HISTÓRIA DE DOENÇA ATUAL (HDA)',
+    'EXAME FÍSICO',
     'ÚLTIMOS EXAMES REALIZADOS',
     'ÚLTIMOS PARECERES REALIZADOS',
     'PENDÊNCIAS',
@@ -1131,6 +1158,7 @@
     preencherLivre('resumo', 'RESUMO DA INTERNAÇÃO');
     preencherLivre('triagensNeonatais', 'TRIAGENS NEONATAIS');
     preencherLivre('hda', 'HISTÓRIA DE DOENÇA ATUAL (HDA)');
+    preencherLivre('exameFisico', 'EXAME FÍSICO');
     preencherLivre('exames', 'ÚLTIMOS EXAMES REALIZADOS');
     preencherLivre('pareceres', 'ÚLTIMOS PARECERES REALIZADOS');
     preencherLivre('pendencias', 'PENDÊNCIAS');
@@ -1211,23 +1239,27 @@ ${orTraco(val('triagensNeonatais'))}
 ${orTraco(val('hda'))}
 
 .
-# 06 Últimos exames realizados
+# 06 Exame físico
+${orTraco(val('exameFisico'))}
+
+.
+# 07 Últimos exames realizados
 ${orTraco(val('exames'))}
 
 .
-# 07 Últimos pareceres realizados
+# 08 Últimos pareceres realizados
 ${orTraco(val('pareceres'))}
 
 .
-# 08 Pendências
+# 09 Pendências
 ${orTraco(val('pendencias'))}
 
 .
-# 09 Programação
+# 10 Programação
 ${orTraco(val('programacao'))}
 
 .
-# 10 Conduta
+# 11 Conduta
 ${orTraco(val('conduta'))}`;
 
     const saida = document.getElementById('saida');
@@ -1259,9 +1291,13 @@ ${orTraco(val('conduta'))}`;
     document.querySelectorAll('.roteiro-group textarea').forEach(el => el.value = '');
     document.getElementById('saida').style.display = 'none';
     document.getElementById('btnCopiar').style.display = 'none';
+    document.getElementById('exameFisico').value = EXAME_FISICO_PADRAO;
     recalcular();
     recalcularEvolucao();
   });
+
+  // pré-preenche o exame físico com o padrão normal ao carregar a página
+  preencherExameFisicoPadrao();
 </script>
 
 </body>
